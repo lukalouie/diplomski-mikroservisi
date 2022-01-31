@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.div404 {
+    font-family: "Shadows Into Light";
+    font-weight: bolder;
+    letter-spacing: 1rem;
+    text-align: center;
+    align-self: center;
+    position: relative;
+    margin-bottom: 23vh;
+}
+
+.div404 h1 {
+    margin-top: 5vh;
+    margin-bottom: 12vh;
+}

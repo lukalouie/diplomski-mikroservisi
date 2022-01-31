@@ -1,0 +1,42 @@
+.homeDiv {
+  position: relative;
+  margin: auto;
+  width: 600px;
+  height: 600px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30vh;
+}
+
+.homeDiv2 {
+  position: relative;
+  margin: auto;
+  width: 650px;
+  height: 750px;
+  text-align: center;
+}
+
+.button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  margin-right: -50%;
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: 50%;
+}
+
+.icon:hover {
+  animation: flash 1s;
+}
+
+@keyframes flash {
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: black;
+  }
+}

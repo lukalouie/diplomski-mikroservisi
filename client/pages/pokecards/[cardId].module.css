@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shadows+Into+Light&display=swap');
+
+.container {
+    text-align: left;
+    font-family: "Shadows Into Light";
+    font-size: 25px;
+    padding-bottom: 11rem;
+    margin-bottom: 27vh;
+}
+
+.container h2 {
+    text-align: center;
+    letter-spacing: 1rem;
+    font-size: 30px;
+}
+
+.ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}

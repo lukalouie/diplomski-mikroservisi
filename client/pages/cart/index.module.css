@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+
+.empty {
+    width: 30vw;
+    height: 30vh;
+    font-family: "Shadows Into Light";
+    font-size: 25px;
+    letter-spacing: 0.5rem;
+    text-align: center;
+    align-items: center;
+    border: 2px solid cadetblue;
+    border-radius: 5px;
+    position: relative;  
+    align-self: center;
+    margin-left: 35vw;
+    margin-bottom: 25vh;
+    margin-top: 20vh;
+}
+
+.empty h2 {
+    font-family: "Shadows Into Light";
+    margin-top: 50px;
+    font-size: 35px;
+    color: crimson;
+    letter-spacing: 0.5rem;
+}
+
+.total {
+    font-family: "Shadows Into Light";
+    width: 200px;
+    border-radius: 5px;
+    border: 2px solid crimson;
+    margin-top: 250px;
+    margin-left: 150px;
+    position: fixed;
+}
+
+.total h2 {
+    font-family: "Shadows Into Light";
+    margin-top: 20px;
+    font-size: 30px;
+    font-size: bold;
+    letter-spacing: 0.5rem;
+}
+
+.total h6 {
+    font-size: 25px;
+}
+
+.cont {
+    margin-bottom: 35vh;
+}

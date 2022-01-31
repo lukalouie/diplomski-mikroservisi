@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+.card {
+    text-align:"center"; 
+    align-items: center; 
+    font-family: "Shadows Into Light";    
+    border: 2px solid crimson;
+    border-radius: 5px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.icon {
+    margin-left: 1rem;
+    margin-right: 2rem;
+}
+
+.title {
+    font-size: 25px;
+    color: red;
+}

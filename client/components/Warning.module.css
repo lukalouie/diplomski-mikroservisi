@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.div {
+    position: inherit;
+    font-size: 20px;
+    font-family: "Shadows Into Light";
+  width: 100%;
+  margin: 5px 5px;
+  float: left;
+  border-radius: 5px;
+  border: 2px solid red;
+  color: red;
+  padding: 10px;
+}

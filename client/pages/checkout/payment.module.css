@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+
+.body {
+    display: grid;
+    place-content: center;
+    
+    text-align: none;
+    min-height: 50vh;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    box-sizing: border-box;
+  
+    font-family: "Shadows Into Light";
+  }
+.h {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 0.5rem;
+}
+
+.div {
+    font-family: "Shadows Into Light";
+    text-align: center;
+    margin-bottom: 11vh;
+}
+  
+  
+  .radLabel {
+    display: flex;
+    align-items: center;
+  
+    border-radius: 100px;
+    padding: 14px 16px;
+    margin: 10px 0;
+  
+    cursor: pointer;
+    transition: .3s;
+  }
+  
+  .radLabel:hover,
+  .radLabel:focus-within {
+    background: hsla(0, 0%, 80%, .14);
+  }
+  
+  .radInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    z-index: -1;
+  }
+  
+  .radDesign {
+    width: 22px;
+    height: 22px;
+    border-radius: 100px;
+  
+    background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+    position: relative;
+  }
+  
+  .radDesign::before {
+    content: '';
+  
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  
+    background: hsl(0, 0%, 90%);
+    transform: scale(1.1);
+    transition: .3s;
+  }
+  
+  .radInput:checked+.radDesign::before {
+    transform: scale(0);
+  }
+  
+  .radText {
+    color: hsl(0, 0%, 60%);
+    margin-left: 14px;
+    letter-spacing: 3px;
+    font-size: 20px;
+    /* font-weight: 900; */
+  
+    transition: .3s;
+  }
+  
+  .radInput:checked~.radText {
+    color: hsl(0, 0%, 40%);
+  }
+
+  .botun {
+    
+    align-self:"center";
+    font-size: 22px;
+    margin-top:"5px"; 
+    font-family: "Shadows Into Light"
+}
+  

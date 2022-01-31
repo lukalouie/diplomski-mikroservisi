@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.card {
+  font-family: "Shadows Into Light";
+  font-size: 25px;
+  width: 30vh;
+  height: 10vh;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding-bottom: 10px;
+  flex-direction: row;
+  position: relative;
+}
+
+.img {
+    padding-top: 5px;
+    object-fit: cover;
+  position: relative;
+  float: left;
+  width: 64px !important;
+  height: 89px !important;
+}
+
+.text {
+    margin-top: 20px;
+    margin-left: 10px;
+}

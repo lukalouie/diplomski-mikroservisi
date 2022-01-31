@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.div {
+  font-family: "Shadows Into Light";
+  font-size: 25px;
+  margin-left: 65vh;
+  margin-right: 65vh;
+  margin-bottom: 40vh;
+  margin-top: 10vh;
+  text-align: center;
+}
+
+.div a {
+  font-family: "Shadows Into Light";
+  color: cadetblue;
+}
+
+.div a:hover {
+  animation: flash 1s;
+}
+
+@keyframes flash {
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: cadetblue;
+  }
+}

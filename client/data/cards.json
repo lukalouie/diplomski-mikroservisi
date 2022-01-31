@@ -1,0 +1,124 @@
+{
+    "cards": [
+    {
+        "id": "1",
+        "name": "Grumpig",
+        "evolution": true,
+        "category": "character",
+        "image": "/images/cards/grumpig.png",
+        "fit": "mint",
+        "price": 300,
+        "description": "Grumpig (Japanese: ブーピッグ Boopig) is a Psychic-type Pokémon introduced in Generation III. It evolves from Spoink starting at level 32."
+    },
+    {
+        "id": "2",
+        "name": "Lapras",
+        "evolution": false,
+        "category": "character",
+        "image": "/images/cards/lapras.png",
+        "fit": "good",
+        "price": 180,
+        "description": "Lapras (Japanese: ラプラス Laplace) is a dual-type Water/Ice Pokémon introduced in Generation I. While it is not known to evolve into or from any other Pokémon, Lapras has a Gigantamax form"
+    },
+    {
+        "id": "3",
+        "name": "Dewott",
+        "evolution": true,
+        "category": "character",
+        "image":"/images/cards/dewot.png",
+        "fit": "mint",
+        "price": 250,
+        "description": "Dewott (Japanese: フタチマル Futachimaru) is a Water-type Pokémon introduced in Generation V. It evolves from Oshawott starting at level 17 and evolves into Samurott starting at level 36."
+    },
+    {
+        "id": "4",
+        "name": "Gliscor",
+        "evolution": true,
+        "category": "character",
+        "image":"/images/cards/gliscor.png",
+        "fit": "bad",
+        "price": 80,
+        "description": "Gliscor (Japanese: グライオン Glion) is a dual-type Ground/Flying Pokémon introduced in Generation IV. It evolves from Gligar when leveled up holding a Razor Fang during the night."
+    },
+    {
+        "id": "5",
+        "name": "Charizard Ex",
+        "evolution": true,
+        "category": "character",
+        "image":"/images/cards/charizard-mega.png",
+        "fit": "mint",
+        "price": 1500,
+        "description": "Charizard (Japanese: リザードン Lizardon) is a dual-type Fire/Flying Pokémon introduced in Generation I. It evolves from Charmeleon starting at level 36. It is the final form of Charmander. Charizard has three other forms and one of them is Mega Charizard X."
+    },
+    {
+        "id": "6",
+        "name": "Gyarados",
+        "evolution": true,
+        "category":"character",
+        "image":"/images/cards/gyarados.png",
+        "fit": "mint",
+        "price": 700,
+        "description": "Gyarados (Japanese: ギャラドス Gyarados) is a dual-type Water/Flying Pokémon introduced in Generation I. It evolves from Magikarp starting at level 20."
+    },
+    {
+        "id": "7",
+        "name": "Regice",
+        "evolution":false,
+        "category":"character",
+        "image":"/images/cards/regice.png",
+        "fit":"good",
+        "price": 140,
+        "description": "Regice (Japanese: レジアイス Regice) is an Ice-type Legendary Pokémon introduced in Generation III. It is not known to evolve into or from any other Pokémon."
+    },
+    {
+        "id": "8",
+        "name": "Jigglypuff",
+        "evolution":false,
+        "category": "character",
+        "image": "/images/cards/jigglypuff.png",
+        "fit":"mint",
+        "price": 3000,
+        "description": "Jigglypuff (Japanese: プリン Purin) is a dual-type Normal/Fairy Pokémon introduced in Generation I. Prior to Generation VI, it was a pure Normal-type Pokémon."
+    },
+    {
+        "id": "9",
+        "name": "Dark Voltorb",
+        "evolution":false,
+        "category":"character",
+        "image":"/images/cards/lapras.png",
+        "fit":"good",
+        "price": 320,
+        "description": "Voltorb (Japanese: ビリリダマ Biriridama) is an Electric-type Pokémon introduced in Generation I. This is the DARK version."
+    },
+    {
+        "id": "10",
+        "name": "Omanyte",
+        "evolution":false,
+        "category":"character",
+        "image":"/images/cards/omanyte.png",
+        "fit":"mint",
+        "price": 400,
+        "description": "Omanyte (Japanese: オムナイト Omnite) is a dual-type Rock/Water Fossil Pokémon introduced in Generation I. It is resurrected from a Helix Fossil and evolves into Omastar starting at level 40."
+    },
+    {
+        "id": "11",
+        "name": "Gengar Shiny",
+        "evolution": true,
+        "category": "character",
+        "image": "/images/cards/gengar.png",
+        "fit": "mint",
+        "price": 5000,
+        "description": "Gengar (Japanese: ゲンガー Gangar) is a dual-type Ghost/Poison Pokémon introduced in Generation I. It evolves from Haunter when traded. It is the final form of Gastly"
+    },
+    {
+        "id": "12",
+        "name": "Jessie's Arbok",
+        "evolution": true,
+        "category": "character",
+        "image": "/images/cards/arbok.png",
+        "fit": "good",
+        "price": 1500,
+        "description": "Arbok (Japanese: アーボック Arbok) is a Poison-type Pokémon introduced in Generation I. It evolves from Ekans starting at level 22."
+    }
+]
+}

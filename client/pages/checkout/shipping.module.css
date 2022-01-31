@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.input {
+  margin: 5px 5px;
+}
+
+.formGroup {
+    padding: 40px;
+    place-content: center;
+    min-height: 40vh;
+    font-size: 20px;
+  margin: 30px auto;
+  width: 450px;
+  margin-bottom: 17vh;
+}
+
+.inputStreet {
+    font-size: 20px;
+    font-family: "Shadows Into Light";
+  width: 100%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.inputCity {
+    font-size: 20px;
+    font-family: "Shadows Into Light";
+  width: 50%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.inputState {
+    font-size: 20px;
+    font-family: "Shadows Into Light";
+  width: 15%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.inputZip {
+    font-size: 20px;
+    font-family: "Shadows Into Light";
+  width: 28%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.inputCounty {
+    font-size: 20px;
+  width: 45%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.inputCountry {
+    font-size: 20px;
+    font-family: "Shadows Into Light";  
+  width: 50%;
+  margin: 5px 5px;
+  float: left;
+}
+
+.container {
+    font-size: 20px;
+  font-family: "Shadows Into Light";
+  border: 2px solid cadetblue;
+  border-radius: 5px;
+}
+
+.botun {
+    
+    font-size: 20px;
+    float:right;
+    align-self:"center";
+    margin-bottom:"5px"; 
+    font-family: "Shadows Into Light"
+}
