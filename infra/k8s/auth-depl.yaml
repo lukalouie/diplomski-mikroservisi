@@ -21,16 +21,6 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-            - name: clientID
-              valueFrom:
-                secretKeyRef:
-                  name: clientid
-                  key: clientID
-            - name: clientSecret
-              valueFrom:
-                secretKeyRef:
-                  name: client-secret
-                  key: clientSecret
 ---
 apiVersion: v1
 kind: Service #default service - clientIP
