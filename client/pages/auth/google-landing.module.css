@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.div {
+  font-family: "Shadows Into Light";
+  font-size: 25px;
+  margin-left: 50vh;
+  margin-right: 50vh;
+  margin-bottom: 1vh;
+  margin-top: 10vh;
+  text-align: center;
+}
