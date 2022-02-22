@@ -8,7 +8,7 @@ const cardSchema = new Schema({
   evolution: {type: Boolean, required: true, default: false},
   type: { type: String, required: true},
   condition: { type: String, required: true, enum: ["mint", "good", "bad"], default: "bad"},
-  price: { type: String, required: true},
+  price: { type: Number, required: true},
   image: { type: String, required: true},
   description: { type: String, required: true}
 })

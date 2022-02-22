@@ -33,9 +33,10 @@ const createCard = async (req, res) => {
         return
     }
 
-    const {title, evolution, type, condition, price, image} = req.body
+    const {title, evolution, type, condition, price, image, description} = req.body
 
-    const card = new Card(title, evolution, type, condition, price, image)
+    const card = new Card({title, evolution, type, condition, price, image, description})
+
 
     try {
         await card.save()
