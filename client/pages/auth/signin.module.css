@@ -19,6 +19,11 @@
   animation: flash 1s;
 }
 
+.button {
+  border: none;
+  border-radius: 50%;
+}
+
 @keyframes flash {
   50% {
     color: transparent;

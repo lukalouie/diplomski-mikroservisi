@@ -3,12 +3,25 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const userRoutes = require('./routes/userRoutes')
+const cookieParser = require("cookie-parser")
+const cors = require("cors")
 
 const app = express()
 
 app.set("trust proxy", true)
 app.use(express.static("public"))
 app.use(bodyParser.json())
+app.use(cookieParser())
+
+app.use(
+  cors({
+    // Sets Access-Control-Allow-Origin to the UI URI
+    origin: "https://poke.dev",
+    // Sets Access-Control-Allow-Credentials to true
+    credentials: true,
+  })
+)
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -17,7 +30,6 @@ app.use((req, res, next) => {
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   )
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
-
   next()
 })
 

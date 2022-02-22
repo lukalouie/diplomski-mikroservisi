@@ -1,5 +1,8 @@
 const { validationResult } = require("express-validator")
 const User = require("../models/user")
+const querystring = require("querystring")
+const axios = require("axios")
+const { google } = require("googleapis") 
 
 const getUsers = async (req, res) => {
     let users
@@ -12,6 +15,56 @@ const getUsers = async (req, res) => {
     }
 
     res.json({users: users.map(user => user.toObject({getters: true})) })
+}
+
+const generatePass = () => {
+    let pass = '';
+    let str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$'
+              
+    for (i = 1; i <= 10; i++) {
+        let char = Math.floor(Math.random() * str.length + 1);
+                  
+        pass += str.charAt(char)
+    }
+
+    return pass
+
+}
+
+//sign s googleom, napravi random pass
+const signWithGoogle = async (email) => {
+    
+    
+    let existingUser
+
+    try {
+        existingUser = await User.find({ email: email })
+    } catch (err) {
+        throw new Error("Sign in failed.")
+    }
+    if (existingUser.length !== 0) {
+        console.log("signed in with google")
+        return ({
+            message: "Logged in",
+            user: existingUser[0].toObject({getters: true})
+        })
+    }
+
+    let password = generatePass()
+
+    const createdUser = new User({
+        email,
+        password
+    })
+
+    try {
+        await createdUser.save()
+    } catch (err) {
+        throw new Error("Sign up failed.")
+    }
+
+    console.log("signed up with google")
+    return ({ user: createdUser.toObject({getters: true})})
 }
 
 const signup = async (req, res) => {
@@ -74,6 +127,32 @@ const login = async (req, res) => {
     })
 }
 
+const oauth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_SECRET,
+  "https://poke.dev/api/users/auth/google/redirect",
+)
+
+const getGoogleAuthURL = () => {
+    /*
+     * Generate a url that asks permissions to the user's email and profile
+     */
+    const scopes = [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email',
+    ];
+
+    return oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      prompt: 'consent',
+      scope: scopes
+    });
+  }
+
+
 exports.getUsers = getUsers
 exports.signup = signup
 exports.login = login
+exports.getGoogleAuthURL = getGoogleAuthURL
+exports.oauth2Client = oauth2Client
+exports.signWithGoogle = signWithGoogle
