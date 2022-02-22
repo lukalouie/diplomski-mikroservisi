@@ -17,6 +17,13 @@ spec:
                 name: auth-srv #tu salji zahtjeve koji dodu gore na path
                 port:
                   number: 3000
+          - path: /api/cards/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: cards-srv #tu salji zahtjeve koji dodu gore na path
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:
