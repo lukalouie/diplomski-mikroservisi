@@ -9,11 +9,11 @@ function Layout(props) {
     return (
         <Fragment>
         <Header />
-        <body>
+        <div>
             <main className={classes.main}>
                 {props.children}
             </main>
-        </body>
+        </div>
         <Footer />
         </Fragment>
     )

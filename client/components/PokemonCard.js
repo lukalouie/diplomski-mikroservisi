@@ -15,12 +15,14 @@ library.add(faMicroscope)
 
 function PokemonCard(props) {
 
-    const {id, name, image, description, evolution, category, fit, price} = props.card
+    const {id, title, image, description, evolution, type, condition, price} = props.card
+
+    console.log(title)
 
     function getFit() {
-        if (fit === "mint") {
+        if (condition === "mint") {
             return "lawnGreen"
-        } else if (fit === "good") {
+        } else if (condition === "good") {
             return "yellow"
         } else {
             return "red"
@@ -40,20 +42,22 @@ function PokemonCard(props) {
     const colorEvo = getEvolution()
 
     return (
-        <Link href={`/pokecards/${id}`}>
+        <>
+        {<Link href={`/pokecards/${id}`}>
         <Card className={classes.card}>
-            <Card.Title className={classes.title}>{name}</Card.Title>
+            <Card.Title className={classes.title}>{title}</Card.Title>
             <Image src={image} width={215} height={300} />
             <div>
                 <ul style={{"textAlign":"left", "listStyleType":"none", "padding":"0", "margin":"0"}}>
                     <li><FontAwesomeIcon icon={["fas", "bolt"]} color={colorEvo}/>&nbsp;{evolution ? "This is an evolution pokemon" : "This is a basic non evolution pokemon"}</li>
-                    <li><FontAwesomeIcon icon={["fas", "code-branch"]} style={{"color":"blue"}}/>&nbsp;It is a <u>{category}</u> category pokemon</li>
-                    <li><FontAwesomeIcon icon={["fas", "microscope"]} color={colorFit}/>&nbsp;Card is in a {fit} condition</li>
+                    <li><FontAwesomeIcon icon={["fas", "code-branch"]} style={{"color":"blue"}}/>&nbsp;It is a <u>{type}</u> category pokemon</li>
+                    <li><FontAwesomeIcon icon={["fas", "microscope"]} color={colorFit}/>&nbsp;Card is in a {condition} condition</li>
                     <li><FontAwesomeIcon icon={["fas", "tags"]} style={{"color":"green"}}/>&nbsp;<span style={{"color":"green"}}>${price.toString()}</span></li>
                 </ul>
             </div>
         </Card>
-        </Link>
+        </Link> }
+        </>
     )
 }
 
