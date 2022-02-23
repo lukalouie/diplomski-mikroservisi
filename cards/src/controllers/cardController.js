@@ -11,9 +11,6 @@ const getCards = async (req, res) => {
         return
     }
 
-    if (cards.length === 0) {
-        return "No cards found."
-    }
 
     res.json({ cards: cards.map(card => card.toObject({getters: true}))})
 }
