@@ -5,21 +5,19 @@ import axios from "axios";
 
 const getCards = async () => {
   const response = await axios.get("/api/cards");
-  return response.data.cards;
-};
+  return response.data.cards
+}
 
 function Explore() {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([])
 
   useEffect(() => {
     getCards().then((res) => {
-      const karte = res;
-      setCards(karte);
-    });
-  }, []);
+      const karte = res
+      setCards(karte)
+    })
+  }, [])
 
-  console.log(`vanSWAGa - ${cards}`);
-  console.log(`array - ${cards2}`);
   return (
     <div className={classes.body}>
       <h2 className={classes.h2}>{(cards && cards.length>0) ? "EXPLORE" : "No cards found :("}</h2>
@@ -32,7 +30,7 @@ function Explore() {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
 /* export async function getStaticProps() {
@@ -47,4 +45,4 @@ function Explore() {
     })
 } */
 
-export default Explore;
+export default Explore
