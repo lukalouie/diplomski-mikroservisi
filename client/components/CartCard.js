@@ -17,16 +17,16 @@ library.add(faMicroscope)
 
 function CartCard(props) {
 
-    const {id, name, image, description, evolution, category, fit, price} = props.card
+    const {id, title, image, description, evolution, type, condition, price} = props.card
 
     const cartContext = useContext(CartContext)
 
     const router = useRouter()
 
     function getFit() {
-        if (fit === "mint") {
+        if (condition === "mint") {
             return "lawnGreen"
-        } else if (fit === "good") {
+        } else if (condition === "good") {
             return "yellow"
         } else {
             return "red"
@@ -54,13 +54,13 @@ function CartCard(props) {
     return (
         <Link href={`/pokecards/${id}`}>
         <Card className={classes.card}>
-            <Card.Title className={classes.title}>{name}</Card.Title>
+            <Card.Title className={classes.title}>{title}</Card.Title>
             <Image src={image} width={215} height={300} />
             <Card.Text>
                 <ul style={{"textAlign":"left", "listStyleType":"none", "padding":"0", "margin":"0"}}>
                     <li><FontAwesomeIcon icon={["fas", "bolt"]} className={classes.icon} color={colorEvo}/>{evolution ? "This is an evolution pokemon" : "This is a basic non evolution pokemon"}</li>
-                    <li><FontAwesomeIcon icon={["fas", "code-branch"]} className={classes.icon} style={{"color":"blue"}}/>It is a <u>{category}</u> category pokemon</li>
-                    <li><FontAwesomeIcon icon={["fas", "microscope"]} className={classes.icon} color={colorFit}/>Card is in a {fit} condition</li>
+                    <li><FontAwesomeIcon icon={["fas", "code-branch"]} className={classes.icon} style={{"color":"blue"}}/>It is a <u>{type}</u> category pokemon</li>
+                    <li><FontAwesomeIcon icon={["fas", "microscope"]} className={classes.icon} color={colorFit}/>Card is in a {condition} condition</li>
                     <li><FontAwesomeIcon icon={["fas", "tags"]} className={classes.icon} style={{"color":"green"}}/><span style={{"color":"green"}}>${price.toString()}</span></li>
                 </ul>
                 <Button variant="outline-danger" style={{"fontSize":"20px", "marginBottom":"5px"}} onClick={handleRemoveClick}>Remove from Cart <FontAwesomeIcon icon={["fas", "cart-arrow-down"]}/></Button>{' '}

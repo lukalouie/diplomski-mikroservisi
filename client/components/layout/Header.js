@@ -5,11 +5,17 @@ import Image from 'next/image'
 import CartContext from "../../store/CartContext"
 import { useContext } from 'react'
 import AuthContext from '../../store/AuthContext'
+import axios from "axios"
 
 function Header() {
 
     const cartContext = useContext(CartContext)
     const authContext = useContext(AuthContext)
+
+    const signOut = async () => {
+        authContext.logOut()
+        const res = await axios.get("/api/users/signout")
+    }
 
     const links = [{label: "Explore", href: "/explore"},{label: "Sign In", href:"/auth/signin"}]
     
@@ -28,7 +34,7 @@ function Header() {
                     </li>
                     <li key="sign" className={classes.li}>
                         <Link href={authContext.loggedIn ? "/" : "/auth/signin"}>
-                            <a onClick={authContext.loggedIn ? authContext.logOut : null} className={classes.a}>{authContext.loggedIn ? "Sign Out" : "Sign In"}</a>
+                            <a onClick={authContext.loggedIn ? signOut : null} className={classes.a}>{authContext.loggedIn ? "Sign Out" : "Sign In"}</a>
                         </Link>
                         </li>
                     <li>

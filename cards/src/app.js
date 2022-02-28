@@ -10,6 +10,7 @@ app.use(express.static("public"))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader(

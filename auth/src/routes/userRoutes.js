@@ -9,6 +9,8 @@ const router = express.Router()
 
 router.get('/', userController.getUsers)
 
+router.get("/current", userController.getCurrent)
+
 router.post(
   '/signup',
   [
@@ -26,7 +28,7 @@ router.get("/auth/google/url", (req, res) => {
   return res.send(userController.getGoogleAuthURL())
 })
 
-
+router.get("/signout", userController.signOut)
 
 // Getting the user from Google with the code
 router.get(`/auth/google/redirect`, async (req, res) => {
@@ -68,7 +70,7 @@ router.get("/auth/google/user", (req, res) => {
   try {
     const decoded = jwt.verify(req.cookies["auth_token"], process.env.JWT_KEY)
     console.log("decoded", decoded)
-    return res.send(decoded)
+    return res.status(201).json({user: decoded})
   } catch (err) {
     console.log(err)
     res.send(null)

@@ -115,7 +115,6 @@ export async function getStaticProps() {
 
 export async function getStaticPaths() {
     try { 
-    // na kojem portu slusa taj mikroservis? 
     const response = await axios.get("http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/cards");
      
     const ids = response.data.cards.map((c) => c.id)

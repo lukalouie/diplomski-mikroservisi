@@ -7,7 +7,7 @@ function SummaryCard(props) {
     return (
         <Card className={classes.card}>
             <Image className={classes.img} width={64} height={89} src={props.item.image} />
-            <h2 className={classes.text}>{props.item.name}</h2>
+            <h2 className={classes.text}>{props.item.title}</h2>
         </Card>
     )
 }

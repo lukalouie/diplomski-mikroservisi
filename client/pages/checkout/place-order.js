@@ -9,6 +9,12 @@ import classes from "./place-order.module.css"
 import { PayPalButton } from 'react-paypal-button-v2'
 import Loader from "../../components/Loader"
 import { useRouter } from 'next/router'
+import axios from "axios"
+
+const setBought = async (id) => {
+    const response = await axios.get(`/api/cards/${id}/update`);
+    return response.data.cards
+}
 
 function PlaceOrderScreen() {
 
@@ -54,8 +60,11 @@ function PlaceOrderScreen() {
         }
       })
 
-      const successPaymentHandler = () => {
-
+      const successPaymentHandler = async () => {
+        cartContext.cartItems.forEach(async (card) => {
+            await setBought(card.id)
+        })
+        router.push("/explore")
       }
 
       useEffect(() => {

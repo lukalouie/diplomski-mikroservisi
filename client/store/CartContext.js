@@ -8,7 +8,8 @@ const CartContext = createContext({
     removeCartItem: function(itemData) {},
     countCartItems: function() {},
     emptyCart: function() {},
-    getPrice: function() {}
+    getPrice: function() {},
+    setCartItems: function() {data}
 })
 
 export function CartContextProvider(props) {
@@ -52,6 +53,10 @@ export function CartContextProvider(props) {
         return price
     }
 
+    function setCartItemsHandler(data) {
+        setCart(cart.push(...data))
+    }
+
     const context = {
         cartItems: cart,
         amount: price,
@@ -60,7 +65,8 @@ export function CartContextProvider(props) {
         removeCartItem: removeCartItemHandler,
         countCartItems: countCarTItemsHandler,
         emptyCart: emptyCartHandler,
-        getPrice: getPriceHandler
+        getPrice: getPriceHandler,
+        setCartItems: setCartItemsHandler,
 
     }
 

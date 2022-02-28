@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const userRoutes = require('./routes/userRoutes')
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+const cookieSession = require("cookie-session") 
 
 const app = express()
 
@@ -12,6 +13,13 @@ app.set("trust proxy", true)
 app.use(express.static("public"))
 app.use(bodyParser.json())
 app.use(cookieParser())
+//maybe koristit
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true
+  })
+)
 
 app.use(
   cors({
@@ -50,6 +58,11 @@ app.use((error, req, res, next) => {
 })
 
 const start = async () => {
+
+  if (!process.env.JWT_KEY) {
+    throw new Error('JWT_KEY must be defined');
+  }
+
   try {
     await mongoose.connect("mongodb://auth-mongo-srv:27017/auth")
     console.log("connected to DB")  

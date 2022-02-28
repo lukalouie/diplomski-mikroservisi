@@ -9,13 +9,13 @@ function CreateCard() {
 
   const router = useRouter()
 
-  const [title, setTitle] = useState("")
-  const [type, setType] = useState("")
-  const [price, setPrice] = useState(0)
+  const [title, setTitle] = useState("Gliscor")
+  const [type, setType] = useState("character")
+  const [price, setPrice] = useState(69)
   const [evolution, setEvolution] = useState(false)
   const [condition, setCondition] = useState("good")
-  const [image, setImage] = useState("")
-  const [description, setDescription] = useState("")
+  const [image, setImage] = useState("/images/cards/gliscor.png")
+  const [description, setDescription] = useState("Gliscor (Japanese: グライオン Glion) is a dual-type Ground/Flying Pokémon introduced in Generation IV. It evolves from Gligar when leveled up holding a Razor Fang during the night.")
   const [error, setError] = useState(null)
 
   const handleEvo = () => {
@@ -56,7 +56,7 @@ function CreateCard() {
           />
         </div>
         <div className="form-group">
-          <label>Type</label>
+          <label>Category</label>
           <input
             value={type}
             onChange={(e) => setType(e.target.value)}

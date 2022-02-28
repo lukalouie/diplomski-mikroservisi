@@ -14,12 +14,13 @@ function Explore() {
   useEffect(() => {
     getCards().then((res) => {
       const karte = res
-      setCards(karte)
+      const notBought = karte.filter(c => !c.bought)
+      setCards(notBought)
     })
   }, [])
 
   return (
-    <div className={classes.body}>
+    <div className={(cards && cards.length>0) ? classes.body : classes.body2}>
       <h2 className={classes.h2}>{(cards && cards.length>0) ? "EXPLORE" : "No cards found :("}</h2>
       <br />
       <ul className={classes.grid}>

@@ -2,7 +2,22 @@ const { validationResult } = require("express-validator")
 const User = require("../models/user")
 const querystring = require("querystring")
 const axios = require("axios")
-const { google } = require("googleapis") 
+const { google } = require("googleapis")
+const jwt = require("jsonwebtoken") 
+
+const getCurrent = async (req, res) => {
+
+    if (!req.session.jwt) {
+        return res.send({ currentUser: null });
+      }
+    
+      try {
+        const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY);
+        res.send({ currentUser: payload });
+      } catch (err) {
+        res.send({ currentUser: null });
+      }
+}
 
 const getUsers = async (req, res) => {
     let users
@@ -102,6 +117,18 @@ const signup = async (req, res) => {
         return
     }
 
+    const userJwt = jwt.sign(
+        {
+          email: createdUser.email
+        },
+        process.env.JWT_KEY,
+        { expiresIn: '1800s' }
+      )
+    
+    req.session = {
+        jwt: userJwt
+    }
+
     res.status(201).json({ user: createdUser.toObject({getters: true})})
 }
 
@@ -121,10 +148,29 @@ const login = async (req, res) => {
         return
     }
 
+    const userJwt = jwt.sign(
+        {
+          email: existingUser[0].email
+        },
+        process.env.JWT_KEY,
+        { expiresIn: '1800s' }
+      )
+    
+    req.session = {
+        jwt: userJwt
+    }
+
+
     res.json({
         message: "Logged in",
         user: existingUser[0].toObject({getters: true})
     })
+}
+
+const signOut = (req, res) => {
+    req.session = null
+
+    res.send({})
 }
 
 const oauth2Client = new google.auth.OAuth2(
@@ -156,3 +202,5 @@ exports.login = login
 exports.getGoogleAuthURL = getGoogleAuthURL
 exports.oauth2Client = oauth2Client
 exports.signWithGoogle = signWithGoogle
+exports.getCurrent = getCurrent
+exports.signOut = signOut
