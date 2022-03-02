@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Link from "next/link"
 import classes from "./Header.module.css"
 import Image from 'next/image'
@@ -7,18 +7,38 @@ import { useContext } from 'react'
 import AuthContext from '../../store/AuthContext'
 import axios from "axios"
 
-function Header() {
+
+function Header({currentUser}) {
 
     const cartContext = useContext(CartContext)
     const authContext = useContext(AuthContext)
+
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const signOut = async () => {
         authContext.logOut()
         const res = await axios.get("/api/users/signout")
     }
 
-    const links = [{label: "Explore", href: "/explore"},{label: "Sign In", href:"/auth/signin"}]
-    
+
+     useEffect(() => {
+         console.log(currentUser)
+         let user = currentUser
+        if (user && user.admin) {
+            setIsAdmin(true)
+        } else {
+            setIsAdmin(false)
+        }
+        
+    })
+
+    const checkAdmin = () => {
+        if (isAdmin) {
+            return "inline"
+        } else {
+            return "none"
+        }
+    }
 
     return (
         <nav className={classes.header}>
@@ -37,10 +57,14 @@ function Header() {
                             <a onClick={authContext.loggedIn ? signOut : null} className={classes.a}>{authContext.loggedIn ? "Sign Out" : "Sign In"}</a>
                         </Link>
                         </li>
+                    <li style={{display:checkAdmin()}} key="admin" className={classes.li}>
+                        <Link href={"/admin"}>
+                            <a className={classes.a}>Admin</a>
+                        </Link>
+                        </li>
                     <li>
                         <Link href="/cart">
                             <a className={classes.a}>Cart {(cartContext.countCartItems() !== 0) ? <span className={classes.badge}>{cartContext.countCartItems()}</span>  : (null)}
-                                {console.log(cartContext.countCartItems())}
                             </a>
                         </Link>
                     </li>
@@ -49,5 +73,13 @@ function Header() {
         </nav>
     )
 }
+
+/* Header.getInitialProps = async context => {
+    const client = buildClient(context)
+    const {data} = await client.get("/api/users/current")
+    console.log("header IP")
+    console.log(data)
+    return data
+  } */
 
 export default Header

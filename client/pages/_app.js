@@ -10,8 +10,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { CartContextProvider } from "../store/CartContext"
 import { PaymentContextProvider } from "../store/PaymentContext"
 import { ShippingContextProvider } from "../store/ShippingContext"
-import { AuthContextProvider } from "../store/AuthContext";
-import { SessionProvider } from 'next-auth/react'
+import { AuthContextProvider } from "../store/AuthContext"
+import buildClient from "../api/buildClient"
+import Header from "../components/layout/Header"
+import Footer from "../components/layout/Footer"
+
 
 library.add(fas)
 library.add(fab)
@@ -19,37 +22,37 @@ library.add(fab)
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
     return (
-        <SessionProvider session={pageProps.session}>
         <AuthContextProvider>
         <ShippingContextProvider>
         <PaymentContextProvider>
         <CartContextProvider>
-        <Layout>
+        <Header currentUser={currentUser} />
             <Component {...pageProps} />
-        </Layout>
+        <Footer />
         </CartContextProvider>
         </PaymentContextProvider>
         </ShippingContextProvider>
         </AuthContextProvider>
-        </SessionProvider>
 
     )
 }
 
-//AppComponent.getInitialProps = async (appContext) => {
-//    const client = buildClient(appContext.ctx)
-//    const { data } = await client.get("/api/users/currentuser")
+AppComponent.getInitialProps = async (appContext) => {
+    const client = buildClient(appContext.ctx)
+    const { data } = await client.get("/api/users/current")
 
-//    let pageProps = {}
-//    if (appContext.Component.getInitialProps) {
-//        pageProps = await appContext.Component.getInitialProps(appContext.ctx)
-//    }
+    console.log(data)
+
+    let pageProps = {}
+    if (appContext.Component.getInitialProps) {
+        pageProps = await appContext.Component.getInitialProps(appContext.ctx)
+    }
     
 
-//    return {
-//        pageProps,
-//        ...data
-//    }
-//}
+    return {
+        pageProps,
+        ...data
+    }
+}
 
 export default AppComponent

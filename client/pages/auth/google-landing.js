@@ -5,14 +5,17 @@ import {Button} from "react-bootstrap"
 import {useRouter} from "next/router"
 import Image from "next/image"
 import classes from "./google-landing.module.css"
+import axios from "axios"
+import buildClient from '../../api/buildClient'
 
-function googleLanding() {
+function googleLanding({user}) {
 
   const context = useContext(AuthContext)
   const router = useRouter()
 
   useEffect(() => {
     context.logIn()
+    context.user = user
   }, [])
 
   const goExplore = () => {
@@ -33,5 +36,28 @@ function googleLanding() {
     </div>
   )
 }
+googleLanding.getInitialProps = async context => {
+    const client = buildClient(context)
+    const {data} = await client.get("/api/users/auth/google/user")
+    console.log(`init props - ${data}`)
+    return data
+  }
+
+/* export async function getStaticProps() {
+  try {
+    const response = await axios.get("http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/auth/google/user")
+    console.log(response.data.user)
+
+    return {
+      props: {
+        currentUser: response.data.user,
+      },
+
+      
+    }
+  } catch (error) {
+    console.log(error)
+  }
+} */
 
 export default googleLanding

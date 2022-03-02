@@ -31,7 +31,6 @@ function Index() {
 
     getGoogleAdmin().then((res) => {
       const admin = res.user
-      console.log(admin)
       if (admin !== undefined && admin!==null) {
         setAdmin(admin)
         finished = true

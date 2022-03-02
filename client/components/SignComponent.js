@@ -13,6 +13,8 @@ function SignComponent({ type, url, gotoUrl }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
+  /* visak, izbaci kada baza bude postojana */
+  const [admin, setAdmin] = useState(false)
 
   /* const { doRequest, errors } = useRequest({
     url: url,
@@ -27,11 +29,19 @@ function SignComponent({ type, url, gotoUrl }) {
     }
   }) */
 
+  const handleAdmin = () => {
+    if (admin) {
+      setAdmin(false)
+    } else {
+      setAdmin(true)
+    }
+  }
+
   const onSubmit = async event => {
     let era = null
     event.preventDefault()
     setError(null)
-    await axios.post(url, {email: email, password: password}).then((response) => console.log(response.data.user)).catch((error) => {
+    await axios.post(url, {email: email, password: password, admin: admin}).catch((error) => {
       setError(error.response.data.error)
       era = error.response.data.error
       }
@@ -64,6 +74,15 @@ function SignComponent({ type, url, gotoUrl }) {
           className="form-control"
         />
       </div>
+      {/* visak kod, izbaci kada baza bude postojana */}
+      <div className="form-group">
+        <label>Admin?&nbsp;&nbsp;&nbsp;</label>  
+          <input 
+            type="checkbox" 
+            label="Admin?"
+            onChange={() => handleAdmin()} 
+          />
+        </div>
       <br/>
       {error ? <PopUp message={error} /> : null}
       <Button type="submit" variant="outline-info">{type}</Button>

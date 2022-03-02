@@ -5,13 +5,14 @@ import Footer from "./Footer"
 
 import React from 'react'
 
-function Layout(props) {
+function Layout( {currentUser}) {
+    console.log(currentUser)
     return (
         <Fragment>
-        <Header />
+        <Header currentUser={currentUser} />
         <div>
             <main className={classes.main}>
-                {props.children}
+                {/* {props.children} */}
             </main>
         </div>
         <Footer />

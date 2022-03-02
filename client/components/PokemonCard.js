@@ -17,7 +17,6 @@ function PokemonCard(props) {
 
     const {id, title, image, description, evolution, type, condition, price} = props.card
 
-    console.log(title)
 
     function getFit() {
         if (condition === "mint") {

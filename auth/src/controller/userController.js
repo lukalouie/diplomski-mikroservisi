@@ -6,8 +6,9 @@ const { google } = require("googleapis")
 const jwt = require("jsonwebtoken") 
 
 const getCurrent = async (req, res) => {
-
+    console.log("started")
     if (!req.session.jwt) {
+        console.log("no jwt")
         return res.send({ currentUser: null });
       }
     
@@ -90,7 +91,7 @@ const signup = async (req, res) => {
         return
     }
 
-    const { email, password } = req.body
+    const { email, password, admin } = req.body
 
     let existingUser
 
@@ -107,7 +108,8 @@ const signup = async (req, res) => {
 
     const createdUser = new User({
         email,
-        password
+        password,
+        admin
     })
 
     try {
@@ -119,7 +121,8 @@ const signup = async (req, res) => {
 
     const userJwt = jwt.sign(
         {
-          email: createdUser.email
+          email: createdUser.email,
+          admin: createdUser.admin
         },
         process.env.JWT_KEY,
         { expiresIn: '1800s' }
@@ -128,7 +131,7 @@ const signup = async (req, res) => {
     req.session = {
         jwt: userJwt
     }
-
+    console.log(userJwt)
     res.status(201).json({ user: createdUser.toObject({getters: true})})
 }
 
@@ -150,7 +153,8 @@ const login = async (req, res) => {
 
     const userJwt = jwt.sign(
         {
-          email: existingUser[0].email
+          email: existingUser[0].email,
+          admin: existingUser[0].admin
         },
         process.env.JWT_KEY,
         { expiresIn: '1800s' }
