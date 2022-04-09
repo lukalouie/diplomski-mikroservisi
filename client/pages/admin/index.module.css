@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shadows+Into+Light&display=swap');
+
+.container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Shadows Into Light";
+}
+
+.container p {
+    align-self: center;
+}
+
+.createCardButton {
+    align-self: center;
+    border: 1px solid rgb(143, 201, 216);
+    color:aqua;
+    background-color:transparent;
+    width: fit-content;
+    height: 30px;
+    border-radius: 5px;
+
+}

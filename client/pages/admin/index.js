@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios"
+import {useRouter} from "next/router"
+import classes from "./index.module.css"
 
 const getAdmin = async () => {
   const res = await axios.get("/api/users/current")
@@ -15,38 +17,49 @@ function Index() {
   
   const [admin, setAdmin] = useState({})
 
+  const router = useRouter()
+
+  const handleCreateCardClick = () => {
+    router.push("/admin/create-card")
+  }
+
+  const handleConfigureUsersClick = () => {
+    
+  }
+
   useEffect(() => {
 
-    let finished = false
 
     getAdmin().then((res) => {
       const admin = res
+      console.log(res)
       if (admin !== undefined && admin!==null) {
         setAdmin(admin)
-        finished = true
+        console.log(admin)
+        return
       }
     })
 
-    if(finished) {return}
 
     getGoogleAdmin().then((res) => {
       const admin = res.user
       if (admin !== undefined && admin!==null) {
         setAdmin(admin)
-        finished = true
+        return
       }
     })
 
-    if(finished) {return}
-
+    return
 
   }, [])
 
   /* const admin = context. */
   return (
-    <div>
+    <div className={classes.container}>
         <h2>Administration</h2>
         <p>Hi {admin.email}, here you can configure orders, users and products.</p>
+        <button onClick={handleCreateCardClick} className={classes.createCardButton}>Add card</button>
+        <button onClick={handleConfigureUsersClick}>Configure users</button>
     </div>
   )
 }
