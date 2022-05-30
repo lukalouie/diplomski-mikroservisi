@@ -37,9 +37,9 @@ async function markAsPurchased (msg) {
   var body = msg.content
     consle.log(body);
 
-    const {title, evolution, type, condition, price, image, description} = body
-
-    const card = new Card({title, evolution, type, condition, price, image, description})
+    //const {id, title, evolution, type, condition, price, image, description, bought} = body
+    
+    //const card = await Card.findOneAndUpdate({id: id}, {title: title, evolution: evolution, type: type, condition: condition, price: price, image: image, description: description, bought: bought})
 
     try {
         await card.save()
@@ -62,7 +62,7 @@ const run = async () => {
         console.error(err)
     }
     try{
-    rabbit.receiveMessage("card_queue", markAsPurchased)
+    rabbit.receiveMessage("card_order_queue", markAsPurchased)
     console.log("listening for cards")
   }catch(err){
     console.log("error starting listener")

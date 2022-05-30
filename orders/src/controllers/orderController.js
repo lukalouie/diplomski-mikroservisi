@@ -37,9 +37,9 @@ const createOrder = async (req, res) => {
     } catch (err) {
         res.status(500).send("Could not create order.")
     }
-
+    rabbit.sendMessage("card_order_queue", cards);
     res.status(201).json({order: order.toObject({getters: true})})
-    rabbit.sendMessage("card_queue", cards);
+    
 }
 
 exports.getOrders = getOrders
