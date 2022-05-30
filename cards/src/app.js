@@ -32,7 +32,7 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || 'An unknown error occurred!' })
   })
 
-async function createCard (msg) {
+async function markAsPurchased (msg) {
 
   var body = msg.content
     consle.log(body);
@@ -62,7 +62,7 @@ const run = async () => {
         console.error(err)
     }
     try{
-    rabbit.receiveMessage("card_queue", createCard)
+    rabbit.receiveMessage("card_queue", markAsPurchased)
     console.log("listening for cards")
   }catch(err){
     console.log("error starting listener")
