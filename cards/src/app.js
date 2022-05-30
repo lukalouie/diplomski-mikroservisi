@@ -33,10 +33,13 @@ app.use((error, req, res, next) => {
   })
 
 async function markAsPurchased (msg) {
-
   var res = msg.content
-    consle.log(res);
-    
+    consle.log(res);    
+}
+
+async function updateToken (msg) {
+  var res = msg.content
+    consle.log(res);    
 }
 
 const run = async () => {
@@ -53,6 +56,7 @@ const run = async () => {
     }
     try{
     rabbit.receiveMessage("card_order_queue", markAsPurchased)
+    rabbit.receiveMessage("auth_queue", updateToken)
     console.log("listening for cards")
   }catch(err){
     console.log("error starting listener")
