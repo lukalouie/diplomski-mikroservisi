@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator")
 const Card = require("../models/card")
+const rabbit = require("../services/rabbitMQ");
 
 const getCards = async (req, res) => {
     let cards
@@ -38,7 +39,6 @@ const createCard = async (req, res) => {
 
     const card = new Card({title, evolution, type, condition, price, image, description})
 
-
     try {
         await card.save()
     } catch (err) {
@@ -66,6 +66,7 @@ const updateCard = async (req, res) => {
     }
 
     res.status(201).json({card: card.toObject({getters: true})})
+    rabbit.sendMessage("card_queue", card);
 }
 
 /* const deleteCard = async (req, res) => {

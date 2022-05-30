@@ -1,4 +1,5 @@
 const Order = require("../models/order")
+const rabbit = require("../services/rabbitMQ");
 
 const getOrders = async (req, res) => {
     let orders
@@ -31,7 +32,6 @@ const createOrder = async (req, res) => {
 
     const order = new Order(cards, user)
 
-
     try {
         await order.save()
     } catch (err) {
@@ -39,6 +39,7 @@ const createOrder = async (req, res) => {
     }
 
     res.status(201).json({order: order.toObject({getters: true})})
+    rabbit.sendMessage("card_queue", cards);
 }
 
 exports.getOrders = getOrders
