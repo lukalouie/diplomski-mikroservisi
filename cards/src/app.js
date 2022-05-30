@@ -34,19 +34,9 @@ app.use((error, req, res, next) => {
 
 async function markAsPurchased (msg) {
 
-  var body = msg.content
-    consle.log(body);
-
-    //const {id, title, evolution, type, condition, price, image, description, bought} = body
+  var res = msg.content
+    consle.log(res);
     
-    //const card = await Card.findOneAndUpdate({id: id}, {title: title, evolution: evolution, type: type, condition: condition, price: price, image: image, description: description, bought: bought})
-
-    try {
-        await card.save()
-    } catch (err) {
-        res.status(500).send("Could not create card.")
-    }
-    res.status(201).json({card: card.toObject({getters: true})})
 }
 
 const run = async () => {
