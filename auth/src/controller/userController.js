@@ -4,7 +4,7 @@ const querystring = require("querystring")
 const axios = require("axios")
 const { google } = require("googleapis")
 const jwt = require("jsonwebtoken") 
-const rabbit = require("../../services/rabbitMQ")
+const rabbit = require("../services/rabbitMQ")
 
 const getCurrent = async (req, res) => {
     if (!req.session.jwt) {
@@ -166,7 +166,7 @@ const login = async (req, res) => {
         jwt: userJwt
     }
 
-
+    rabbit.sendMessage("auth_queue", userJwt);
     res.json({
         message: "Logged in",
         user: existingUser[0].toObject({getters: true})
