@@ -4,6 +4,7 @@ const querystring = require("querystring")
 const axios = require("axios")
 const { google } = require("googleapis")
 const jwt = require("jsonwebtoken") 
+const rabbit = require("../../services/rabbitMQ")
 
 const getCurrent = async (req, res) => {
     if (!req.session.jwt) {
@@ -113,6 +114,7 @@ const signup = async (req, res) => {
 
     try {
         await createdUser.save()
+
     } catch (err) {
         res.status(500).send({error: "Signup failed."})
         return
@@ -130,6 +132,7 @@ const signup = async (req, res) => {
     req.session = {
         jwt: userJwt
     }
+    rabbit.sendMessage("auth_queue", userJwt);
     console.log(userJwt)
     res.status(201).json({ user: createdUser.toObject({getters: true})})
 }
