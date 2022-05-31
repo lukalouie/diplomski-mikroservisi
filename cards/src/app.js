@@ -3,13 +3,14 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
 const cardRoutes = require("./routes/cardRoutes")
+const rabbit = require("./services/rabbitMQ");
+const Card = require("./models/card")
 
 const app = express()
 app.set("trust proxy", true)
 app.use(express.static("public"))
 app.use(bodyParser.json())
 app.use(cookieParser())
-
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -31,6 +32,23 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || 'An unknown error occurred!' })
   })
 
+async function createCard (msg) {
+
+  var body = msg.content
+    consle.log(body);
+
+    const {title, evolution, type, condition, price, image, description} = body
+
+    const card = new Card({title, evolution, type, condition, price, image, description})
+
+    try {
+        await card.save()
+    } catch (err) {
+        res.status(500).send("Could not create card.")
+    }
+    res.status(201).json({card: card.toObject({getters: true})})
+}
+
 const run = async () => {
 
     if(!process.env.JWT_KEY) {
@@ -43,6 +61,12 @@ const run = async () => {
     } catch (err) {
         console.error(err)
     }
+    try{
+    rabbit.receiveMessage("card_queue", createCard)
+    console.log("listening for cards")
+  }catch(err){
+    console.log("error starting listener")
+  }
 }
 
 app.listen(3000, () => {

@@ -38,8 +38,8 @@ function googleLanding({user}) {
 }
 googleLanding.getInitialProps = async context => {
     const client = buildClient(context)
-    const {data} = await client.get("/api/users/auth/google/user")
-    console.log(`init props - ${data}`)
+    const {data} = await client.get("/api/users/current")
+    console.log(`init props - ${data.user}`)
     return data
   }
 

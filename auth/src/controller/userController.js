@@ -6,7 +6,6 @@ const { google } = require("googleapis")
 const jwt = require("jsonwebtoken") 
 
 const getCurrent = async (req, res) => {
-    console.log("started")
     if (!req.session.jwt) {
         console.log("no jwt")
         return res.send({ currentUser: null });
