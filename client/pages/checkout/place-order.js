@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import PaymentContext from "../../store/PaymentContext";
 import CartContext from "../../store/CartContext";
 import ShippingContext from "../../store/ShippingContext";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import SummaryCard from "../../components/SummaryCard";
 import CheckoutSteps from "../../components/CheckoutSteps";
-import classes from "./place-order.module.css";
+import classes, { StyledPlaceOrderView } from "./place-order.styles.js";
 import AuthContext from "../../store/AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Button } from "../../components/Button/Button";
 
 function PlaceOrderScreen() {
   const paymentContext = useContext(PaymentContext);
@@ -34,25 +34,27 @@ function PlaceOrderScreen() {
 
   const successPaymentHandler = async () => {
     const buying = cartContext.cartItems.map((cartItem) => cartItem.id);
-    let price = 0
-    let orderId = Math.floor(Math.random() * 100000)
-    cartContext.cartItems.forEach((card) => {price = price + card.price});
-    const address = shippingContext.address
-    const city = shippingContext.city
-    const country = shippingContext.country
+    let price = 0;
+    let orderId = Math.floor(Math.random() * 100000);
+    cartContext.cartItems.forEach((card) => {
+      price = price + card.price;
+    });
+    const address = shippingContext.address;
+    const city = shippingContext.city;
+    const country = shippingContext.country;
     await axios.post(`/api/orders/create`, {
       cards: buying,
       user: authContext.user.email,
       total: price,
       address: `${address}, ${city}, ${country}`,
       isDelivered: false,
-      orderId: orderId
+      orderId: orderId,
     });
     await axios.post(`/api/shipping/create`, {
       orderId: orderId,
       address: `${address}, ${city}, ${country}`,
       isDelivered: false,
-    })
+    });
     cartContext.emptyCart();
     router.push("/explore");
   };
@@ -67,45 +69,32 @@ function PlaceOrderScreen() {
   }, []);
 
   return (
-    <Container>
+    <StyledPlaceOrderView>
       <CheckoutSteps step1 step2 step3 />
-      <Row>
-        <Col>
-          <Card style={{ border: "none" }} className={checkMargin()}>
-            <Col style={{ textAlign: "center", alignContent: "center" }}>
-              <h2>Your Order</h2>
-              <br />
-              <ul style={{ listStyleType: "none" }}>
-                {cartContext.cartItems.map((item) => {
-                  return (
-                    <li key={item.id}>
-                      <SummaryCard item={item} />
-                      <br />
-                    </li>
-                  );
-                })}
-              </ul>
-              <p>Method: {paymentContext.paymentMethod}</p>
-            </Col>
-            <Col style={{ textAlign: "center" }}>
-              <h2>Shipping</h2>
-              <Card style={{ border: "none", textAlign: "center" }}>
-                <Card.Text>
-                  Address: {shippingContext.address}
-                  <br />
-                  {shippingContext.city}, {shippingContext.country}
-                  <br />
-                  {shippingContext.zip}
-                </Card.Text>
-              </Card>
-            </Col>
-          </Card>
-        </Col>
-        <Col>
-          <Button onClick={successPaymentHandler}>Checkout</Button>
-        </Col>
-      </Row>
-    </Container>
+      <h2>Your Order</h2>
+      <div>
+        <ul style={{ listStyleType: "none" }}>
+          {cartContext.cartItems.map((item) => {
+            return (
+              <li key={item.id}>
+                <SummaryCard item={item} />
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div>
+        <span>Method: {paymentContext.paymentMethod}</span>
+        <div>
+          <h2>Shipping</h2>
+          <span>Address: {shippingContext.address}</span>
+          <span>City: {shippingContext.city}, {shippingContext.country}</span>
+          <span>ZIP: {shippingContext.zip}</span>
+        </div>
+      </div>
+      <Button text="Checkout" onClick={successPaymentHandler} />
+    </StyledPlaceOrderView>
   );
 }
 

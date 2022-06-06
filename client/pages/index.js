@@ -1,37 +1,26 @@
-import React, { useState } from "react"
+import React from "react"
 import {useRouter} from 'next/router'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from "next/image"
-import classes from "./index.module.css"
+import {StyledIndexView} from "./index.styles"
+import { Button } from "../components/Button/Button.js"
 
 
 function Page() {
 
-    const [src, setSrc] = useState("/images/oo.png")
-    const [height, setHeight] = useState(600)
-    const [width, setWidth] = useState(600)
-    const [div, setDiv] = useState(classes.homeDiv)
-    const [hidden, setHidden] = useState(false)
-
-
     const router = useRouter()
 
-    const googleHandler = () => {
-        setSrc("/images/oo.gif")
-        setWidth(613)
-        setHeight(714)
-        setDiv(classes.homeDiv2)
-        setHidden(true)
-        setTimeout(router.push, 500, "/explore")
+    const handleSignUpClick = () => {
+        router.push("/auth/signup")
     }
 
     
       return (
-        <div className={classes.homeDiv}>
-            
-            <Image className={classes.img} width={width} height={height} src={src} />
-            <button className={classes.button} onClick={googleHandler}><FontAwesomeIcon className={classes.icon} icon={["fab", "google"]} size="2x" hidden={hidden} /></button>
-        </div>
+        <StyledIndexView>
+            <span>Hi! Nice to see you!</span>
+            <span>please sign up if you do not have an accout</span>
+            <div>
+            <Button text="Sign Up" onClick={handleSignUpClick} />
+            </div>
+        </StyledIndexView>
       );
     }
 

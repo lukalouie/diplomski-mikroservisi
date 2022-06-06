@@ -8,7 +8,7 @@ export const StyledOrderContainer = styled.div`
     border-radius: 20px;
     padding: 10px 20px;
     justify-content: space-between;
-    min-width: 550px;
+    min-width: 700px;
     margin-top: 20px;
     color: ${Colors.NavyBlue};
 

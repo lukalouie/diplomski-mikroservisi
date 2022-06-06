@@ -30,7 +30,7 @@ function Header({currentUser}) {
             setIsAdmin(false)
         }
         
-    })
+    }, [currentUser])
 
     const checkAdmin = () => {
         if (isAdmin) {

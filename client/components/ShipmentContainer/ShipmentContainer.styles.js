@@ -11,6 +11,7 @@ export const StyledShipmentContainer = styled.div`
     min-width: 350px;
     margin-top: 20px;
     color: ${Colors.NavyBlue};
+    max-width: 400px;
 
     div {
         display: flex;
