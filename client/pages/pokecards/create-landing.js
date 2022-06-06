@@ -8,7 +8,7 @@ function CreateLanding() {
     const router = useRouter()
 
     const handleAdd = () => {
-        router.push("/pokecards/create-card")
+        router.push("/pokecards/create-landing")
     }
 
     const handleExplore = () => {

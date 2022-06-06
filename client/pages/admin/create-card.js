@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button } from "react-bootstrap"
+import { Button } from "../../components/Button/Button"
 import axios from "axios"
 import classes from "./create-card.module.css"
 import PopUp from "../../components/Warning"
@@ -53,6 +53,7 @@ function CreateCard() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="form-control"
+            style={{minWidth: "400px"}}
           />
         </div>
         <div className="form-group">
@@ -72,7 +73,7 @@ function CreateCard() {
           />
         </div>
         <br/>
-        <div className="form-group" style={{"margin-left": "35vh", "margin-right":"35vh", "border":"2px solid grey", "border-radius":"5px"}}>
+        <div className="form-group">
             Condition<br/>
             <input 
                 type="radio" 
@@ -126,9 +127,7 @@ function CreateCard() {
         </div>
         <br />
         {error ? <PopUp message={error} /> : null}
-        <Button type="submit" variant="outline-info">
-          Add Card
-        </Button>
+        <Button type="submit" text="Add Card" />
       </form>
     </div>
   )

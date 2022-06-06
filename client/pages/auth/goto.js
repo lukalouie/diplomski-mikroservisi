@@ -8,18 +8,17 @@ import buildClient from "../../api/buildClient"
 import axios from "axios"
 
 
-function Goto() {
+function Goto({user}) {
   const router = useRouter()
 
   
 
   const context = useContext(AuthContext)
 
-  /* useEffect(() => {
-      console.log("goto UE")
-      context.setUser(currentUser)
-      console.log(context.user)
-  }) */
+  useEffect(() => {
+    context.logIn()
+    context.user = user
+  }, [])
 
   const goExplore = () => {
     router.push("/explore")
@@ -47,11 +46,10 @@ function Goto() {
   )
 }
 
-/* Goto.getInitialProps = async context => {
+Goto.getInitialProps = async context => {
     const client = buildClient(context)
     const {data} = await client.get("/api/users/current")
     return data
   }
- */
 
-export default Goto
+  export default Goto

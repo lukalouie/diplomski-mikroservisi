@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipping-mongo
+  template:
+    metadata:
+      labels:
+        app: shipping-mongo
+    spec:
+      containers:
+        - name: shipping-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shipping-mongo-srv
+spec:
+  selector:
+    app: shipping-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

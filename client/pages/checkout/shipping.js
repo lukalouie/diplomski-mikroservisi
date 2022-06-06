@@ -57,6 +57,7 @@ const submitHandler = (e) => {
 
 }
 useEffect(() => {
+    console.log(preContext.cartItems)
     if (preContext.cartItems.length === 0) {
         router.push("/cart")
     } else if (!authContext.loggedIn) {

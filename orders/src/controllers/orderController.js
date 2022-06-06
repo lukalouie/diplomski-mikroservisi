@@ -7,10 +7,8 @@ const getOrders = async (req, res) => {
     try {
         orders = await Order.find({})
     } catch (err) {
-        res.status(500).send("Could not fetch orders.")
-        return
+        return res.status(500).send("Could not fetch orders.")
     }
-
 
     res.json({ orders: orders.map(order => order.toObject({getters: true}))})
 }
@@ -19,7 +17,7 @@ const getOrder = async (req, res) => {
     const order = await Order.findById(req.params.id)
 
     if (!order) {
-        res.status(500).send("Could not find order.")
+     return res.status(500).send("Could not find order.")
     }
 
     res.send(order)
@@ -27,17 +25,19 @@ const getOrder = async (req, res) => {
 
 const createOrder = async (req, res) => {
     console.log("started")
+    console.log(req.body)
 
-    const {cards, user} = req.body
+    const {cards, user, total, address, isDelivered, orderId} = req.body
 
-    const order = new Order(cards, user)
+    const order = new Order({cards, user, total, address, isDelivered, orderId})
 
     try {
         await order.save()
     } catch (err) {
-        res.status(500).send("Could not create order.")
+        return res.status(500).send("Could not create order.")
     }
-    rabbit.sendMessage("card_order_queue", cards);
+    rabbit.sendCardOrder("card_order_queue", cards);
+    console.log("sent card "+cards)
     res.status(201).json({order: order.toObject({getters: true})})
     
 }

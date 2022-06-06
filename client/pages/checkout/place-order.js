@@ -10,32 +10,6 @@ import AuthContext from "../../store/AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const setBought = async (id, user) => {
-  const response = await axios.get(`/api/cards/${id}`);
-  console.log(response);
-  const card = response.data;
-  try {
-    await axios.put(`/api/cards/${id}/update`, {
-      title: card.title,
-      evolution: card.evolution,
-      type: card.type,
-      condition: card.condition,
-      price: card.price,
-      image: card.image,
-      description: card.description,
-      bought: true,
-    });
-    console.log("done");
-  } catch (err) {
-    console.log(err);
-  }
-  try {
-    await axios.post(`/api/orders/create`, { card: id, user: user });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 function PlaceOrderScreen() {
   const paymentContext = useContext(PaymentContext);
   const cartContext = useContext(CartContext);
@@ -59,9 +33,27 @@ function PlaceOrderScreen() {
   };
 
   const successPaymentHandler = async () => {
-    cartContext.cartItems.forEach(async (card) => {
-      await setBought(card.id, authContext.user);
+    const buying = cartContext.cartItems.map((cartItem) => cartItem.id);
+    let price = 0
+    let orderId = Math.floor(Math.random() * 100000)
+    cartContext.cartItems.forEach((card) => {price = price + card.price});
+    const address = shippingContext.address
+    const city = shippingContext.city
+    const country = shippingContext.country
+    await axios.post(`/api/orders/create`, {
+      cards: buying,
+      user: authContext.user.email,
+      total: price,
+      address: `${address}, ${city}, ${country}`,
+      isDelivered: false,
+      orderId: orderId
     });
+    await axios.post(`/api/shipping/create`, {
+      orderId: orderId,
+      address: `${address}, ${city}, ${country}`,
+      isDelivered: false,
+    })
+    cartContext.emptyCart();
     router.push("/explore");
   };
 

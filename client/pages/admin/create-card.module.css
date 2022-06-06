@@ -4,7 +4,14 @@
     text-align: center;
     font-family: "Shadows Into Light";
     font-size: 25px;
-    padding-bottom: 5rem;
-    margin-left: 35vh;
-    margin-right: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 550px;
+}
+
+ 
+.form-group {
+    min-width: 500px;
 }

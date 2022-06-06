@@ -2,8 +2,11 @@
 
 
 .empty {
-    width: 30vw;
-    height: 30vh;
+    display: flex;
+    padding: 20px 40px;
+    flex-direction:column;
+    align-self: center;
+    justify-self: center;
     font-family: "Shadows Into Light";
     font-size: 25px;
     letter-spacing: 0.5rem;
@@ -13,9 +16,6 @@
     border-radius: 5px;
     position: relative;  
     align-self: center;
-    margin-left: 35vw;
-    margin-bottom: 25vh;
-    margin-top: 20vh;
 }
 
 .empty h2 {
@@ -49,5 +49,12 @@
 }
 
 .cont {
-    margin-bottom: 35vh;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.emptyBig {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
 }

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from "axios"
 import {useRouter} from "next/router"
 import classes from "./index.module.css"
+import { Button } from '../../components/Button/Button'
 
 const getAdmin = async () => {
   const res = await axios.get("/api/users/current")
@@ -23,8 +24,12 @@ function Index() {
     router.push("/admin/create-card")
   }
 
-  const handleConfigureUsersClick = () => {
-    
+  const handleOrderClick = () => {
+    router.push("/admin/orders")
+  }
+
+  const handleShippingClick = () => {
+    router.push("/admin/shippings")
   }
 
   useEffect(() => {
@@ -53,13 +58,14 @@ function Index() {
 
   }, [])
 
-  /* const admin = context. */
   return (
     <div className={classes.container}>
         <h2>Administration</h2>
         <p>Hi {admin.email}, here you can configure orders, users and products.</p>
-        <button onClick={handleCreateCardClick} className={classes.createCardButton}>Add card</button>
-        <button onClick={handleConfigureUsersClick}>Configure users</button>
+        <Button onClick={handleCreateCardClick} className={classes.createCardButton} text="Add card"/>
+        <Button onClick={handleOrderClick} className={classes.configureUserButton} text="Orders" />
+        <Button onClick={handleShippingClick} className={classes.configureUserButton} text="Shipments" />
+
     </div>
   )
 }

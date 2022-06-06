@@ -6,6 +6,7 @@
     font-family: "Shadows Into Light";    
     border: 2px solid crimson;
     border-radius: 5px;
+    min-width: 350px;
 }
 
 .card:hover {

@@ -31,15 +31,23 @@ app.use((error, req, res, next) => {
     res.status(error.code || 500)
     res.json({ message: error.message || 'An unknown error occurred!' })
   })
-
+  
 async function markAsPurchased (msg) {
-  var res = msg.content
-    consle.log(res);    
+  console.log(msg)
+  console.log(msg.content.toString('utf8'));
+  var cards = JSON.stringify(msg.content)
+    console.log(cards);  
+    const saved = await Card.updateMany({id:{$in:cards}},{$set:{bought:true}});
+        
+    if (!saved) {
+      console.log("Could not find card.")
+  }     
+  console.log("saved "+saved.modifiedCount)
 }
 
 async function updateToken (msg) {
   var res = msg.content
-    consle.log(res);    
+    console.log(res);    
 }
 
 const run = async () => {
@@ -56,7 +64,7 @@ const run = async () => {
     }
     try{
     rabbit.receiveMessage("card_order_queue", markAsPurchased)
-    rabbit.receiveMessage("auth_queue", updateToken)
+    //rabbit.receiveMessage("auth_queue", updateToken)
     console.log("listening for cards")
   }catch(err){
     console.log("error starting listener")

@@ -1,22 +1,17 @@
 import Header from "./Header"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 import classes from "./Layout.module.css"
 import Footer from "./Footer"
 
 import React from 'react'
 
-function Layout( {currentUser}) {
-    console.log(currentUser)
+function Layout(props) {
+
     return (
-        <Fragment>
-        <Header currentUser={currentUser} />
-        <div>
-            <main className={classes.main}>
-                {/* {props.children} */}
-            </main>
+        <div className={classes.container}>
+            {props.children}
+            <Footer />
         </div>
-        <Footer />
-        </Fragment>
     )
 }
 

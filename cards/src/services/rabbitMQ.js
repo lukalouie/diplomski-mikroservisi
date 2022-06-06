@@ -1,7 +1,7 @@
 var amqplib = require('amqplib/callback_api');
 
 //var url = "amqp://default_user_GUOP6IHBHQW4GktwXCo:uYPnz5w8s5t02TmAT3NRNAebpeI8sjOu@poke.dev:5672";
-var url = "amqps://regihlif:U_oYrlSjZtFPzBulpFYQY8EJ5cx5MVUO@cattle.rmq2.cloudamqp.com/regihlif"
+var url = "amqps://ibzhoufk:jaN3PVLe61sGkF3W7YKO3O1nRu1nu4f0@sparrow.rmq.cloudamqp.com/ibzhoufk"
 
 function sendMessage(queue, msg){    
   amqplib.connect(url, function(err, con){

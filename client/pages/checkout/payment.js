@@ -33,6 +33,7 @@ function PaymentScreen() {
     }
 
     useEffect(() => {
+        console.log(prePreContext.cartItems)
         preContext.checkAllIn()
         if (prePreContext.cartItems.length === 0) {
             router.push("/cart")

@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const orderRoutes = require("./routes/orderRoutes");
+const rabbit = require("./services/rabbitMQ");
+const Order = require("./models/order");
 
 const app = express();
 app.set("trust proxy", true);
@@ -20,7 +22,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use("/api/orders", orderRoutes);
 
 console.log();
@@ -33,6 +34,20 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
+async function markAsDelivered(msg) {
+  var order = msg.content;
+  console.log("order " + order);
+  const saved = await Order.updateMany(
+    { orderId: order },
+    { $set: { isDelivered: true } }
+  );
+
+  if (!saved) {
+    console.log("Could not find order.");
+  }
+  console.log("delivered " + saved.modifiedCount);
+}
+
 const run = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY must be defined!");
@@ -43,6 +58,12 @@ const run = async () => {
     console.log("connected to mongodb - orders");
   } catch (err) {
     console.error(err);
+  }
+  try {
+    rabbit.receiveMessage("orders_shipping_queue", markAsDelivered);
+    console.log("listening for orders");
+  } catch (err) {
+    console.log("error starting listener");
   }
 };
 

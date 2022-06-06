@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shadows+Into+Light&display=swap');
+
+.footerContainer {
+  bottom: 0 !important;
+  margin-top: auto;
+  width: 100%;
+}
+
 .footerDiv {
   text-align: center;
   position: relative;

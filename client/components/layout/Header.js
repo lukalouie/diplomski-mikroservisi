@@ -22,10 +22,10 @@ function Header({currentUser}) {
 
 
      useEffect(() => {
-         console.log(currentUser)
          let user = currentUser
-        if (user && user.admin) {
+        if (authContext.loggedIn && user.admin) {
             setIsAdmin(true)
+            authContext.setUser(currentUser)
         } else {
             setIsAdmin(false)
         }

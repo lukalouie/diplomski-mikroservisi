@@ -17,7 +17,7 @@ function Explore() {
       const notBought = karte.filter(c => !c.bought)
       setCards(notBought)
     })
-  }, [])
+  }, [cards])
 
   return (
     <div className={(cards && cards.length>0) ? classes.body : classes.body2}>

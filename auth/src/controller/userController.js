@@ -8,7 +8,6 @@ const rabbit = require("../services/rabbitMQ")
 
 const getCurrent = async (req, res) => {
     if (!req.session.jwt) {
-        console.log("no jwt")
         return res.send({ currentUser: null });
       }
     

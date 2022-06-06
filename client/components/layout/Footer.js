@@ -4,9 +4,9 @@ import classes from "./Footer.module.css"
 
 function Footer() {
     return (
-      <>
+      <div className={classes.footerContainer}>
     <hr className={classes.hrFooter} />
-    <footer className={classes.siteFooter}>
+    <div className={classes.siteFooter}>
       <div>
         <div className={classes.footerDiv}>
 
@@ -48,8 +48,8 @@ function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-    </>
+    </div>
+    </div>
   )
 }
 

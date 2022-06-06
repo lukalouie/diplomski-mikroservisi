@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipping
+  template:
+    metadata:
+      labels:
+        app: shipping
+    spec:
+      containers:
+        - name: shipping
+          image: louieluka/shipping
+          env: #env variable
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service #default service - clientIP
+metadata:
+  name: shipping-srv
+spec:
+  selector:
+    app: shipping
+  ports:
+    - name: shipping
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
